@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MRP
+namespace MRP.Business
 {
     internal class Game : MediaEntry
     {
@@ -13,6 +13,12 @@ namespace MRP
            
         }
 
-        protected override Type MediaType => typeof(Game);
+        public enum Genre
+        {
+            None = 0,
+            FPS,
+            RPG,
+            Racing
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MRP.Business
 {
+    // TODO: refactor this
     internal abstract class MediaEntry
     {
         protected User _creator;

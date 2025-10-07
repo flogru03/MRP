@@ -13,6 +13,8 @@ namespace MRP.Business
            
         }
 
+        // TODO: add global genre enum
+
         public enum Genre
         {
             None = 0,

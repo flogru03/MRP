@@ -8,13 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Database\" />
-    <Folder Include="DTOs\" />
     <Folder Include="Tests\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Isopoh.Cryptography.Argon2" Version="2.0.0" />
+    <PackageReference Include="Npgsql" Version="9.0.4" />
+    <PackageReference Include="Npgsql.Json.NET" Version="9.0.4" />
   </ItemGroup>
 
 </Project>

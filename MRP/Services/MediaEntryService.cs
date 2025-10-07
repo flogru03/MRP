@@ -1,4 +1,5 @@
 ﻿using MRP.Business;
+using MRP.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,11 @@ namespace MRP.Services
 {
     internal class MediaEntryService
     {
-        private User _user;
-        public MediaEntryService(User user)
-        {
-            _user = user;
-        }
-        public MediaEntry createMedia(Type mediaType)
+        // ########## METHODS ##########
+
+        // TODO: Implement MediaEntryService
+
+        public MediaEntry CreateMediaEntry<T>() where T : MediaEntry
         {
             throw new NotImplementedException();
         }
@@ -37,6 +37,15 @@ namespace MRP.Services
         public MediaEntry getMediaEntry(int id)
         {
             throw new NotImplementedException();
-        }  
+        }
+
+        // ########## CONSTRUCTORS ##########
+        public MediaEntryService(MediaEntryRepository mediaEntryRepo)
+        { 
+            _mediaRepo = mediaEntryRepo;
+        }
+
+        // ########## MEMBERS ##########
+        private MediaEntryRepository _mediaRepo;
     }
 }

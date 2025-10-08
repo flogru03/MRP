@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MRP.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,17 +10,21 @@ namespace MRP.Business
     internal class User
     {
         // ########## PROPERTIES ##########
+        public Guid Id { get; }
         public string Username { get; set; }
-        public string Password { get; set; }
+        public string Password { get; private set; }
+        public List<Guid> FavoriteEntryIDs { get; private set; }
 
-        // TODO: add ratings, fav, stats
-
+        // ########## METHODS ##########   
+        
 
         // ########## CONSTRUCTORS ##########
         public User(string username, string password)
         {
+            Id = new Guid();
             Username = username;
             Password = password;
+            FavoriteEntryIDs = new List<Guid>();
         }
     }
 }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MRP.DTO;
+using MRP.Business;
 using Npgsql;
 
 namespace MRP.Database
 {
-    internal class UserRepository : IRepository<UserDTO>
+    internal class UserRepository : IRepository<User>
     {
         // ########## METHODS ##########
-        public IEnumerable<UserDTO> GetAll()
+        public IEnumerable<User> GetAll()
         {
             using var conn = new NpgsqlConnection(_connString);
             conn.Open();
@@ -21,37 +21,34 @@ namespace MRP.Database
 
             while (reader.Read())
             {
-                yield return new UserDTO
-                {
-                    Id = reader.GetGuid(0),
-                    Username = reader.GetString(1),
-                    Password = reader.GetString(2)
-                };
+                yield return new User
+                (
+                    reader.GetGuid(0),
+                    reader.GetString(1),
+                    reader.GetString(2)
+                );
                 
             }
         }
 
         // TODO: implement user repository
-        public UserDTO GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-        public UserDTO GetByUsername(string username)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Add(UserDTO entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(UserDTO entity)
-        {
-            throw new NotImplementedException();
-        }
 
         public void DeleteById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        User IRepository<User>.GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(User entity)
         {
             throw new NotImplementedException();
         }

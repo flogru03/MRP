@@ -14,30 +14,27 @@ namespace MRP.Services
     internal class UserService
     {
         // ########## METHODS ##########
-        public User CreateUser(string username, string password)
+        public User CreateUser(CreateUserDTO dto)
         {
-            // Check if User already exists
-            if (_userRepo.GetByUsername(username) != null)
-                throw new UserAlreadyExistsException($"User \"{username}\" already exists!");
+            // Check if Data is valid
+            if (dto.Username == string.Empty || dto.Password == string.Empty) 
+                throw new ArgumentNullException($"Empty Username or Password in {nameof(dto)}");
 
-            // TODO: Creating User-Model before dto
+            // Check if User already exists
+            if (_userRepo.GetByUsername(dto.Username) != null)
+                throw new UserAlreadyExistsException($"User \"{dto.Username}\" already exists!");
 
             // Hashing Password
-            var passwordHashed = PasswordHasher.Hash(password);
+            var passwordHashed = PasswordHasher.Hash(dto.Password);
 
-            // Create DTO
-            var userDTO = new UserDTO
-            {
-                Id = Guid.NewGuid(),
-                Username = username,
-                Password = passwordHashed
-            };
+            // Create new User Model
+            var newUser = new User(dto.Username, passwordHashed);
 
             // Insert new User to DB
-            _userRepo.Add(userDTO);
+            _userRepo.Add(newUser);
 
             // Return new User Model
-            return new User(username, passwordHashed);
+            return newUser;
         }
 
         // ########## CONSTRUCTORS ##########

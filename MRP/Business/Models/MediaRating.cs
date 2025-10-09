@@ -5,18 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MRP.Business
+namespace MRP.Business.Models
 {
     internal class MediaRating
     {
         public User Creator { get; private set; }
-        public MediaEntry Entry { get; private set; }
+        public MediaEntryBase Entry { get; private set; }
         public uint Value { get; private set; }
         public bool IsPublic { get; private set; }
         public string Comment { get; private set; } 
         public DateTime CreatedAt {  get; private set; }
         public uint Likes { get; private set; }
-        public MediaRating(MediaEntry entry, User user)
+        public MediaRating(MediaEntryBase entry, User user)
         {
             Entry = entry;
             Creator = user;

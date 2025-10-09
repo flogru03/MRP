@@ -22,7 +22,7 @@ namespace MRP.Business
                 MemoryCost = 1024 * 64,
                 Lanes = 4,
                 Threads = Environment.ProcessorCount,
-                Password = UTF8Encoding.UTF8.GetBytes(password)
+                Password = Encoding.UTF8.GetBytes(password)
             };
 
             return Argon2.Hash(config);

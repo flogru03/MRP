@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MRP.Business
+namespace MRP.Business.Models
 {
     // TODO: refactor this
-    internal abstract class MediaEntry
+    internal abstract class MediaEntryBase
     {
         protected User _creator;
         protected List<MediaRating> _ratings;
@@ -16,7 +16,7 @@ namespace MRP.Business
         public DateOnly ReleaseYear;
         public uint AgeRestriction;
 
-        protected MediaEntry(User user)
+        protected MediaEntryBase(User user)
         {
             _creator = user;
             _ratings = new List<MediaRating>();
@@ -27,7 +27,7 @@ namespace MRP.Business
             AgeRestriction = 0;
         }
 
-        protected MediaEntry
+        protected MediaEntryBase
             (
             User creator,
             List<string> genre,

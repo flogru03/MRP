@@ -1,5 +1,6 @@
-﻿using MRP.Business;
-using MRP.DTO;
+﻿using MRP.DTO;
+using MRP.Database;
+using MRP.Business.Models;
 
 namespace MRP
 {

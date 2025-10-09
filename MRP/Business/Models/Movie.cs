@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MRP.Business
+namespace MRP.Business.Models
 {
-    internal class Movie : MediaEntry
+    internal class Movie : MediaEntryBase
     {
         public Movie(User creator) : base(creator)
         {

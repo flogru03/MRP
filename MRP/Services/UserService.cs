@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using MRP.Business;
+﻿using MRP.Business;
+using MRP.Business.Models;
 using MRP.Database;
 using MRP.DTO;
-using Isopoh.Cryptography.Argon2;
 
 namespace MRP.Services
 {
@@ -21,6 +15,7 @@ namespace MRP.Services
                 throw new ArgumentNullException($"Empty Username or Password in {nameof(dto)}");
 
             // Check if User already exists
+            // TODO: use linq to get user
             if (_userRepo.GetByUsername(dto.Username) != null)
                 throw new UserAlreadyExistsException($"User \"{dto.Username}\" already exists!");
 

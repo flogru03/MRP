@@ -1,4 +1,5 @@
 ﻿using MRP.Business;
+using MRP.Business.Models;
 using MRP.Database;
 using System;
 using System.Collections.Generic;
@@ -14,27 +15,27 @@ namespace MRP.Services
 
         // TODO: Implement MediaEntryService
 
-        public MediaEntry CreateMediaEntry<T>() where T : MediaEntry
+        public MediaEntryBase CreateMediaEntry<T>() where T : MediaEntryBase
         {
             throw new NotImplementedException();
         }
-        public void updateMedia(MediaEntry entry)
+        public void updateMedia(MediaEntryBase entry)
         {
             throw new NotImplementedException();
         }
-        public void deleteMedia(MediaEntry entry)
+        public void deleteMedia(MediaEntryBase entry)
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<MediaEntry> getAllMediaEntries() 
+        public IEnumerable<MediaEntryBase> getAllMediaEntries() 
         { 
             throw new NotImplementedException(); 
         }
-        public IEnumerable<MediaEntry> searchMediaEntries(MediaFilter? filter, MediaEntry entryPattern)
+        public IEnumerable<MediaEntryBase> searchMediaEntries(MediaFilter? filter, MediaEntryBase entryPattern)
         {
             throw new NotImplementedException();
         }
-        public MediaEntry getMediaEntry(int id)
+        public MediaEntryBase getMediaEntry(int id)
         {
             throw new NotImplementedException();
         }

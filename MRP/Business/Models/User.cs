@@ -1,39 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MRP.Business.Models                  
+﻿namespace MRP.Business.Models                  
 {
+    /// <summary>
+    /// User Model
+    /// </summary>
     internal class User
     {
-        // ########## PROPERTIES ##########
+        /*******************************/
+        /*          PROPERTIES         */
+        /*******************************/
+
+        /// <summary>
+        /// UserID
+        /// </summary>
         public Guid Id { get; }
+
+        /// <summary>
+        /// Username
+        /// </summary>
         public string Username { get; set; }
-        public string Password { get; private set; }
-        public List<Guid> FavoriteEntryIDs { get; private set; }
 
-        // ########## METHODS ##########   
+        /// <summary>
+        /// Password
+        /// </summary>
+        public string Password { get; set; }
+
+        /// <summary>
+        /// List of EntryIDs of favorite media-entries
+        /// </summary>
+        public HashSet<Guid> FavoriteEntryIDs { get; set; }
+
+        /****************************/
+        /*          METHODS         */
+        /****************************/
 
 
-        // ########## CONSTRUCTORS ##########
+        /*********************************/
+        /*          CONSTRUCTORS         */
+        /*********************************/
 
         ///<summary>
         ///Constructor for creating new User
         ///</summary> 
+        ///<param name="username">Username</param>
+        ///<param name="password">Password</param>
         public User(string username, string password)
         {
             Id = new Guid();
             Username = username;
             Password = password;
-            FavoriteEntryIDs = new List<Guid>();
+            FavoriteEntryIDs = new HashSet<Guid>();
         }
 
         ///<summary>
         ///Constructor for rehydrating from Database
         ///</summary> 
-        internal User(Guid id, string username, string password, List<Guid> favoriteEntryIDs)
+        internal User(Guid id, string username, string password, HashSet<Guid> favoriteEntryIDs)
         {
             Id = id;
             Username = username;

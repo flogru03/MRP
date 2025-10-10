@@ -23,7 +23,7 @@ namespace MRP.Database
             conn.Open();
 
             // Execute query for reading all user data
-            using var cmd = new NpgsqlCommand("SELECT * FROM users");
+            using var cmd = new NpgsqlCommand(@"SELECT * FROM users", conn);
             using var reader = cmd.ExecuteReader();
 
             while (reader.Read())
@@ -32,11 +32,11 @@ namespace MRP.Database
                 var id = reader.GetGuid(reader.GetOrdinal("id"));
                 var username = reader.GetString(reader.GetOrdinal("username"));
                 var password = reader.GetString(reader.GetOrdinal("password"));
-                var favoriteEntryIDs = new List<Guid>();
+                var favoriteEntryIDs = new HashSet<Guid>();
 
                 if (!reader.IsDBNull(reader.GetOrdinal("favoriteEntryIDs")))
                 {   // Reading array
-                    favoriteEntryIDs = new List<Guid>(reader.GetFieldValue<Guid[]>(reader.GetOrdinal("favoriteEntryIDs")));
+                    favoriteEntryIDs = reader.GetFieldValue<Guid[]>(reader.GetOrdinal("favoriteEntryIDs")).ToHashSet();
                 }
 
                 // returning users
@@ -48,20 +48,23 @@ namespace MRP.Database
         /// Connects to db, executes query and deletes user with specified id.
         /// </summary>
         /// <param name="id">Guid of the User</param>
-        public void DeleteById(Guid id)
+        /// <returns>True on success, False if User doesn't exist</returns>
+        public bool DeleteById(Guid id)
         {
-            // Return if user doesn't exist
-            if (this.GetById(id) != null)
-                return;
+            // Return false if user doesn't exist
+            if (GetById(id) == null)
+                return false;
 
             // Connection to database
             using var conn = new NpgsqlConnection(_connString);
             conn.Open();
 
             // Execute query for deleting user with specidied id
-            using var cmd = new NpgsqlCommand("DELETE FROM users WHERE id = @id");
+            using var cmd = new NpgsqlCommand(@"DELETE FROM users WHERE id = @id", conn);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
+
+            return true;
         }
 
         /// <summary>
@@ -76,7 +79,7 @@ namespace MRP.Database
             conn.Open();
 
             // Execute query for reading all user data
-            using var cmd = new NpgsqlCommand("SELECT * FROM users WHERE id = @id");
+            using var cmd = new NpgsqlCommand(@"SELECT * FROM users WHERE id = @id", conn);
             cmd.Parameters.AddWithValue("@id", id);
             using var reader = cmd.ExecuteReader();
 
@@ -85,11 +88,11 @@ namespace MRP.Database
                 // Reading all data
                 var username = reader.GetString(reader.GetOrdinal("username"));
                 var password = reader.GetString(reader.GetOrdinal("password"));
-                var favoriteEntryIDs = new List<Guid>();
+                var favoriteEntryIDs = new HashSet<Guid>();
 
                 if (!reader.IsDBNull(reader.GetOrdinal("favoriteEntryIDs")))
                 {   // Reading array
-                    favoriteEntryIDs = new List<Guid>(reader.GetFieldValue<Guid[]>(reader.GetOrdinal("favoriteEntryIDs")));
+                    favoriteEntryIDs = reader.GetFieldValue<Guid[]>(reader.GetOrdinal("favoriteEntryIDs")).ToHashSet();
                 }
 
                 // Return new user object
@@ -108,9 +111,22 @@ namespace MRP.Database
         /// </summary>
         /// <param name="entity">Object of the user class</param>
         /// <exception cref="NotImplementedException"></exception>
-        public void Add(User entity)
+        public bool Add(User entity)
         {
-            throw new NotImplementedException();
+            // Return false if user already exists
+            if (GetById(entity.Id) != null)
+                return false;
+
+            // Connection to database
+            using var conn = new NpgsqlConnection(_connString);
+            conn.Open();
+
+            using var cmd = new NpgsqlCommand(
+                @"INSERT INTO users
+                    (id, username, password, )
+                VALUES 
+                    (@id, @creator, @title, @description, @release_year, @age_restriction, @genre, @type, @created_at);", 
+                conn);
         }
 
         // TODO: Implement updating User
@@ -119,7 +135,7 @@ namespace MRP.Database
         /// </summary>
         /// <param name="entity">Object of the user class</param>
         /// <exception cref="NotImplementedException"></exception>
-        public void Update(User entity)
+        public bool Update(User entity)
         {
             throw new NotImplementedException();
         }

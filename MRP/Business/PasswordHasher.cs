@@ -1,17 +1,22 @@
-﻿using Isopoh.Cryptography.Argon2;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Isopoh.Cryptography.Argon2;   // Argon2 Hashing Algorithm
+using System.Text;                  // UTF8 Encoding
 
 namespace MRP.Business
 {
+    /// <summary>
+    /// Provides hashing algorithm for storing password on database
+    /// </summary>
     internal static class PasswordHasher
     {
-        // TODO: add comments
+        /****************************/
+        /*          METHODS         */
+        /****************************/
 
-        // ########## PROPERTIES ##########
+        /// <summary>
+        /// Hashes specified string
+        /// </summary>
+        /// <param name="password">Password in clear text</param>
+        /// <returns>Hashvalue as string</returns>
         public static string Hash(string password)
         {
             Argon2Config config = new Argon2Config

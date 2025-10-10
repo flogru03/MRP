@@ -5,9 +5,22 @@ using MRP.DTO;
 
 namespace MRP.Services
 {
+    /// <summary>
+    /// Provides methods for manipulation user data
+    /// </summary>
     internal class UserService
     {
-        // ########## METHODS ##########
+        /****************************/
+        /*          METHODS         */
+        /****************************/
+
+        /// <summary>
+        /// Initializes new object of the User class and saves it on the database
+        /// </summary>
+        /// <param name="dto">DTO for intializing new User objects</param>
+        /// <returns>Object of the User created</returns>
+        /// <exception cref="ArgumentNullException">If credentials are invalid</exception>
+        /// <exception cref="UserAlreadyExistsException">If User already exists</exception>
         public User CreateUser(CreateUserDTO dto)
         {
             // Check if Data is valid
@@ -16,9 +29,12 @@ namespace MRP.Services
 
             // Check if User already exists
             // TODO: use linq to get user
-            if (_userRepo.GetByUsername(dto.Username) != null)
-                throw new UserAlreadyExistsException($"User \"{dto.Username}\" already exists!");
-
+            foreach (var user in _userRepo.GetAll())
+            {
+                if (user.Username == dto.Username)
+                    throw new UserAlreadyExistsException($"User \"{dto.Username}\" already exists!");
+            }
+            
             // Hashing Password
             var passwordHashed = PasswordHasher.Hash(dto.Password);
 
@@ -32,13 +48,22 @@ namespace MRP.Services
             return newUser;
         }
 
-        // ########## CONSTRUCTORS ##########
+        /*********************************/
+        /*          CONSTRUCTORS         */
+        /*********************************/
+
+        /// <summary>
+        /// Initializes new object of the UserService class
+        /// </summary>
+        /// <param name="repo">Repository which handles all User data</param>
         public UserService(UserRepository repo)
         {
             _userRepo = repo;
         }
 
-        // ########## MEMBERS ##########
+        /****************************/
+        /*          MEMBERS         */
+        /****************************/
         private UserRepository _userRepo;
     }
 }

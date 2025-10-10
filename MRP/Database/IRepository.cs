@@ -1,15 +1,15 @@
 ﻿namespace MRP.Database
 {
     /// <summary>
-    /// Interface for Database Repositorys with specified Model
+    /// Repository-Interface for specified Model
     /// </summary>
-    /// <typeparam name="T">Model</typeparam>
-    internal interface IRepository<T> where T : class
+    /// <typeparam name="TModel">Model</typeparam>
+    internal interface IRepository<TModel> where TModel : class
     {
-        IEnumerable<T> GetAll();
-        T? GetById(Guid id);
-        void Add(T entity);
-        void Update(T entity);
-        void DeleteById(Guid id);
+        IEnumerable<TModel> GetAll();
+        TModel? GetById(Guid id);
+        bool Add(TModel entity);
+        bool Update(TModel entity);
+        bool DeleteById(Guid id);
     }
 }

@@ -1,52 +1,45 @@
 ﻿using MRP.Business;
 using MRP.Business.Models;
 using MRP.Database;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MRP.Services
 {
+    /// <summary>
+    /// Provides Methods for manipulating MediaEntry data
+    /// </summary>
     internal class MediaEntryService
     {
-        // ########## METHODS ##########
+        /****************************/
+        /*          METHODS         */
+        /****************************/
 
-        // TODO: Implement MediaEntryService
-
-        public MediaEntryBase CreateMediaEntry<T>() where T : MediaEntryBase
-        {
-            throw new NotImplementedException();
-        }
-        public void updateMedia(MediaEntryBase entry)
-        {
-            throw new NotImplementedException();
-        }
-        public void deleteMedia(MediaEntryBase entry)
-        {
-            throw new NotImplementedException();
-        }
-        public IEnumerable<MediaEntryBase> getAllMediaEntries() 
-        { 
-            throw new NotImplementedException(); 
-        }
-        public IEnumerable<MediaEntryBase> searchMediaEntries(MediaFilter? filter, MediaEntryBase entryPattern)
-        {
-            throw new NotImplementedException();
-        }
-        public MediaEntryBase getMediaEntry(int id)
+        /// <summary>
+        /// Connects to database and selects all MediaEntry data
+        /// </summary>
+        /// <typeparam name="T">Type of MediaEntry</typeparam>
+        /// <returns>All MediaEntry data as objects</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public MediaEntry CreateMediaEntry<T>() where T : MediaEntry
         {
             throw new NotImplementedException();
         }
 
-        // ########## CONSTRUCTORS ##########
-        public MediaEntryService(MediaEntryRepository mediaEntryRepo)
+        /*********************************/
+        /*          CONSTRUCTORS         */
+        /*********************************/
+
+        /// <summary>
+        /// Initializes new MediaEntryService object
+        /// </summary>
+        /// <param name="mediaEntryRepo">Repository which handles all MediaEntry data</param>
+        public MediaEntryService(MediaRepository mediaEntryRepo)
         { 
             _mediaRepo = mediaEntryRepo;
         }
 
-        // ########## MEMBERS ##########
-        private MediaEntryRepository _mediaRepo;
+        /****************************/
+        /*          MEMBERS         */
+        /****************************/
+        private MediaRepository _mediaRepo;
     }
 }

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MRP.DTO
+﻿namespace MRP.DTO
 {
+    /// <summary>
+    /// DTO for creating new User
+    /// </summary>
     internal record CreateUserDTO
     {
         public string Username { get; init; } = string.Empty;

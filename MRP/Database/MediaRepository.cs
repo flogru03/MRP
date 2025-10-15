@@ -38,8 +38,13 @@ namespace MRP.Database
         /// </summary>
         /// <param name="entity">Object of a class derived from the MediaEntryBase class</param>
         /// <exception cref="NotImplementedException"></exception>
-        public void Add(MediaEntry entity)
+        public void Add<T>(MediaEntry entity)
         {
+            // Connect to Database
+            using var conn = new NpgsqlConnection(_connString);
+            conn.Open();
+
+            // Build and execute query for adding new MediaEntry
             using var cmd = new NpgsqlCommand(
                 @"INSERT INTO media_entries
                     (id, creator, title, description, release_year, age_restriction, genre, type, created_at)
@@ -47,15 +52,17 @@ namespace MRP.Database
                     (@id, @creator, @title, @description, @release_year, @age_restriction, @genre, @type, @created_at);",
                 conn);
 
-            cmd.Parameters.AddWithValue("@id", entry.Id);
-            cmd.Parameters.AddWithValue("@creator", entry.Creator);
-            cmd.Parameters.AddWithValue("@title", entry.Title);
-            cmd.Parameters.AddWithValue("@description", entry.Description ?? (object)DBNull.Value);
-            cmd.Parameters.AddWithValue("@release_year", entry.ReleaseYear.ToDateTime(TimeOnly.MinValue));
-            cmd.Parameters.AddWithValue("@age_restriction", entry.AgeRestriction);
-            cmd.Parameters.AddWithValue("@genre", entry.Genre);
-            cmd.Parameters.AddWithValue("@type", entry.Type.ToString());
-            cmd.Parameters.AddWithValue("@created_at", entry.CreatedAt);
+            cmd.Parameters.AddWithValue("@id", entity.Id);
+            cmd.Parameters.AddWithValue("@creator", entity.Creator);
+            cmd.Parameters.AddWithValue("@title", entity.Title);
+            cmd.Parameters.AddWithValue("@description", entity.Description ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@release_year", entity.ReleaseYear.ToDateTime(TimeOnly.MinValue));
+            cmd.Parameters.AddWithValue("@age_restriction", entity.AgeRestriction);
+            // TODO: Add List of Genres in generic way
+            // cmd.Parameters.AddWithValue("@genre", entity.Genre);
+            // TODO: T -> Type
+            cmd.Parameters.AddWithValue("@type", nameof(entity).ToString());
+            cmd.Parameters.AddWithValue("@created_at", entity.CreatedAt);
         }
 
         /// <summary>
@@ -74,6 +81,21 @@ namespace MRP.Database
         /// <param name="id">Guid of the User</param>
         /// <exception cref="NotImplementedException"></exception>
         public void DeleteById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Add(MediaEntry entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IRepository<MediaEntry>.Update(MediaEntry entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IRepository<MediaEntry>.DeleteById(Guid id)
         {
             throw new NotImplementedException();
         }

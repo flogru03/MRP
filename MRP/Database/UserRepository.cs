@@ -105,7 +105,6 @@ namespace MRP.Database
             }
         }
 
-        // TODO: Implement adding user
         /// <summary>
         /// Connects to db, executes query and inserts user into database.
         /// </summary>
@@ -121,15 +120,24 @@ namespace MRP.Database
             using var conn = new NpgsqlConnection(_connString);
             conn.Open();
 
+            // Build query for adding new User
             using var cmd = new NpgsqlCommand(
                 @"INSERT INTO users
-                    (id, username, password, )
+                    (id, username, password)
                 VALUES 
-                    (@id, @creator, @title, @description, @release_year, @age_restriction, @genre, @type, @created_at);", 
+                    (@id, @username, @passowrd);", 
                 conn);
+
+            cmd.Parameters.AddWithValue("@id", entity.Id);
+            cmd.Parameters.AddWithValue("@username", entity.Username);
+            cmd.Parameters.AddWithValue("@password", entity.Password);
+
+            // Execute query and close connection
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            return true;
         }
 
-        // TODO: Implement updating User
         /// <summary>
         /// Connects to db, executes query and updates user.
         /// </summary>
@@ -137,7 +145,31 @@ namespace MRP.Database
         /// <exception cref="NotImplementedException"></exception>
         public bool Update(User entity)
         {
-            throw new NotImplementedException();
+            // Return false if user doesn't exist
+            if (GetById(entity.Id) == null)
+                return false;
+
+            // Connection to database
+            using var conn = new NpgsqlConnection(_connString);
+            conn.Open();
+
+            // Build query for updating existing User
+            using var cmd = new NpgsqlCommand(
+                @"UPDATE users
+                  SET username = @username, 
+                      password = @password
+                  WHERE
+                      id = @id;",
+                conn);
+
+            cmd.Parameters.AddWithValue("@id", entity.Id);
+            cmd.Parameters.AddWithValue("@username", entity.Username);
+            cmd.Parameters.AddWithValue("@password", entity.Password);
+
+            // Execute query and close connection
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            return true;
         }
 
         /*********************************/

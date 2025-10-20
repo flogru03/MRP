@@ -6,8 +6,7 @@ namespace MRP
     {
         static void Main(string[] args)
         {
-            var server = new HttpServer("http://localhost:8080/api/");
-            server.Start();
+
         }
     }
 }

@@ -23,13 +23,21 @@
   </Class>
   <Class Name="MRP.Business.Models.Game">
     <Position X="11.5" Y="12.5" Width="2.5" />
+    <InheritanceLine Type="MRP.Business.Models.MediaEntry" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="15.209" />
+        <Point X="3.5" Y="15.576" />
+        <Point X="12.625" Y="15.576" />
+        <Point X="12.625" Y="14.184" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Business\Models\Entries\Game.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Business.Models.MediaEntry">
-    <Position X="8.75" Y="9" Width="2.5" />
+    <Position X="2.25" Y="12.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAgAEAAACEAAAAAAAAAAAACEAAAAAAAAAA=</HashCode>
       <FileName>Business\Models\Entries\MediaEntry.cs</FileName>
@@ -37,10 +45,12 @@
   </Class>
   <Class Name="MRP.Business.Models.Movie">
     <Position X="8.75" Y="12.5" Width="2.5" />
-    <InheritanceLine Type="MRP.Business.Models.MediaEntry" ManuallyRouted="true">
+    <InheritanceLine Type="MRP.Business.Models.MediaEntry" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="10" Y="11.709" />
-        <Point X="10" Y="12.5" />
+        <Point X="3.5" Y="15.209" />
+        <Point X="3.5" Y="15.595" />
+        <Point X="10" Y="15.595" />
+        <Point X="10" Y="14.184" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -50,6 +60,14 @@
   </Class>
   <Class Name="MRP.Business.Models.Series">
     <Position X="6" Y="12.5" Width="2.5" />
+    <InheritanceLine Type="MRP.Business.Models.MediaEntry" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="15.209" />
+        <Point X="3.5" Y="15.576" />
+        <Point X="7.188" Y="15.576" />
+        <Point X="7.188" Y="14.184" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Business\Models\Entries\Series.cs</FileName>
@@ -72,7 +90,7 @@
   <Class Name="MRP.Database.MediaRepository" BaseTypeListCollapsed="true">
     <Position X="9.5" Y="21.25" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAYAAAAAAAAAAACAAAAAAAAAACAAAAAAAgAAAAAAAIA=</HashCode>
+      <HashCode>AAYAACAAAAAAAACAAAAAAABAACAAAAAAAgAAAAAAAIA=</HashCode>
       <FileName>Database\MediaRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -88,14 +106,14 @@
   <Class Name="MRP.Server.HttpServer">
     <Position X="11" Y="2.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACACEAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAACACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Server\HttpServer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Server.RequestRouter">
     <Position X="11" Y="5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABAAAAQAAAAAAABAAAAgAAAACAAAAA=</HashCode>
       <FileName>Server\RequestRouter.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -109,15 +127,29 @@
   <Class Name="MRP.Services.UserService">
     <Position X="9" Y="17.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAIAAAAAAAAAIAAEAE=</HashCode>
       <FileName>Services\UserService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Program">
-    <Position X="0.5" Y="2.25" Width="1.5" />
+    <Position X="11.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MRP.Controller.UserController">
+    <Position X="9.5" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAQAAAAAEAAAAABAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Controller\UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MRP.Services.AuthenticationService">
+    <Position X="13.5" Y="5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAACAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Services\AuthenticationService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="MRP.Database.IRepository&lt;TModel&gt;">

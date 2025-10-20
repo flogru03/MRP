@@ -1,17 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using System.Net;
 using Newtonsoft.Json;
-using MRP.Services;
 using MRP.Controller;
 
 namespace MRP.Server
 {
+    /// <summary>
+    /// Delegates http-requests to correct controller
+    /// </summary>
     internal class RequestRouter
     {
+        /****************************/
+        /*          METHODS         */
+        /****************************/
+
+        /// <summary>
+        /// Aanalyses path and calls corresponding handler
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task HandleRequest(HttpListenerContext context)
         {
             try
@@ -36,15 +43,24 @@ namespace MRP.Server
                     case "/api/leaderboard":
                         break;
                     default:
+                        await WriteJsonAsync(response, $"Error: {path}: invalid path", 404);
                         break;
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine($"Fehler: {ex.Message}");
+                Console.WriteLine($"Fehler: {e.Message}");
             }
         }
+
+        /// <summary>
+        /// Writes Http-response
+        /// </summary>
+        /// <param name="response"></param>
+        /// <param name="data"></param>
+        /// <param name="statusCode"></param>
+        /// <returns></returns>
         public static async Task WriteJsonAsync(HttpListenerResponse response, object data, int statusCode = 200)
         {
             response.StatusCode = statusCode;
@@ -53,6 +69,17 @@ namespace MRP.Server
             var bytes = Encoding.UTF8.GetBytes(json);
             await response.OutputStream.WriteAsync(bytes, 0, bytes.Length);
         }
+
+        /*********************************/
+        /*          CONSTRUCTORS         */
+        /*********************************/
+
+        /// <summary>
+        /// Initializes new Instance of the RequestRouter-class
+        /// </summary>
+        /// <param name="userCon">User Controller</param>
+        /// <param name="mediaCon">Media Controller</param>
+        /// <param name="ratingCon">Rating Controller</param>
         public RequestRouter(UserController userCon, MediaController mediaCon, RatingController ratingCon)
         {
             _userController = userCon;
@@ -60,6 +87,9 @@ namespace MRP.Server
             _ratingController = ratingCon;
         }
 
+        /****************************/
+        /*          MEMBERS         */
+        /****************************/
         private UserController _userController;
         private MediaController _mediaController;
         private RatingController _ratingController;

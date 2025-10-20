@@ -1,22 +1,26 @@
 ﻿using MRP.DTO;
 using MRP.Services;
 using MRP.Server;
-using MRP.Business.Models;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using MRP.Business;
-
+using Newtonsoft.Json;
+using System.Net;
 
 namespace MRP.Controller
 {
+    /// <summary>
+    /// Handles User-specific HTTP-requests
+    /// </summary>
     internal class UserController
     {
+        /****************************/
+        /*          METHODS         */
+        /****************************/
+
+        /// <summary>
+        /// Routes the path specified in the request to correct handler
+        /// </summary>
+        /// <param name="req">HTTP-Request</param>
+        /// <param name="res">HTTP-Response</param>
         public async Task HandleRequestAsync(HttpListenerRequest req, HttpListenerResponse res)
         {
             var path = req.Url!.AbsolutePath.ToLower();
@@ -31,6 +35,12 @@ namespace MRP.Controller
                 await Login(req, res);  
             }
         }
+
+        /// <summary>
+        /// Registers new User
+        /// </summary>
+        /// <param name="req">HTTP-Request</param>
+        /// <param name="res">HTTP-Response</param>
         private async Task Register(HttpListenerRequest req, HttpListenerResponse res)
         {
             try
@@ -51,6 +61,12 @@ namespace MRP.Controller
                 await RequestRouter.WriteJsonAsync(res, e.Message, (int)HttpStatusCode.Conflict);
             }
         }
+
+        /// <summary>
+        /// User-Login
+        /// </summary>
+        /// <param name="req">HTTP-Request</param>
+        /// <param name="res">HTTP-Response</param>
         private async Task Login(HttpListenerRequest req, HttpListenerResponse res)
         {
             try
@@ -66,7 +82,9 @@ namespace MRP.Controller
                 if (_service.CheckPassword(dto!) == false)
                     throw new UnauthorizedAccessException("Wrong Password");
 
-                // Generate Token
+                // TODO: Generate Token
+                _auth.GenerateToken(dto!.Username);
+                await RequestRouter.WriteJsonAsync(res, "Login successful", (int)HttpStatusCode.OK);
             }
             catch (Exception e)
             {
@@ -74,13 +92,25 @@ namespace MRP.Controller
                 await RequestRouter.WriteJsonAsync(res, e.Message, (int)HttpStatusCode.Conflict);
             }
         }
-        
 
-        public UserController(UserService userService)
+        /*********************************/
+        /*          CONSTRUCTORS         */
+        /*********************************/
+
+        /// <summary>
+        /// Initializes new object of the UserController class
+        /// </summary>
+        /// <param name="userService">Service for handling User data</param>
+        public UserController(UserService userService, AuthenticationService auth)
         {
             _service = userService;
+            _auth = auth;
         }
 
+        /****************************/
+        /*          MEMBERS         */
+        /****************************/
         private UserService _service;
+        private AuthenticationService _auth;
     }
 }

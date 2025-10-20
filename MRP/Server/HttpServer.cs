@@ -11,25 +11,26 @@ namespace MRP.Server
     {
         private readonly HttpListener _listener;
         private readonly RequestRouter _router;
-        private readonly string _prefix;
 
-        public HttpServer(string prefix)
+        public HttpServer(string prefix, RequestRouter router)
         {
-            _prefix = prefix;
             _listener = new HttpListener();
-            _listener.Prefixes.Add(_prefix);
-            _router = new RequestRouter();
+            _listener.Prefixes.Add(prefix);
+
+            _router = router;
         }
 
         public void Start()
         {
+            if (_listener == null) 
+                return;
+
             _listener.Start();
-            Console.WriteLine($"Server läuft auf {_prefix}");
 
             while (true)
             {
                 var context = _listener.GetContext();
-                _ = Task.Run(() => _router.HandleRequest(context));
+                using var _ = Task.Run(() => _router.HandleRequest(context));
             }
         }
     }

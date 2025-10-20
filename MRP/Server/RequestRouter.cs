@@ -6,52 +6,63 @@ using System.Threading.Tasks;
 using System.Net;
 using Newtonsoft.Json;
 using MRP.Services;
+using MRP.Controller;
 
 namespace MRP.Server
 {
-    public class RequestRouter
+    internal class RequestRouter
     {
-        private readonly UserService _userService = new();
-
         public async Task HandleRequest(HttpListenerContext context)
         {
             try
             {
                 var request = context.Request;
                 var response = context.Response;
-                string path = request.Url!.AbsolutePath;
-                string method = request.HttpMethod;
+
+                string path = request.Url!.AbsolutePath.ToLower();
+                string method = request.HttpMethod.ToUpper();
 
                 Console.WriteLine($"[{method}] {path}");
 
-                if (path == "/api/users/register" && method == "POST")
+                switch (path)
                 {
-                    // await _userService.Register(request, response);
+                    case "/api/user":
+                        await _userController.HandleRequestAsync(request, response);
+                        break;
+                    case "/api/media":
+                        break;
+                    case "/api/ratings":
+                        break;
+                    case "/api/leaderboard":
+                        break;
+                    default:
+                        break;
                 }
-                else if (path == "/api/users/login" && method == "POST")
-                {
-                    // await _userService.Login(request, response);
-                }
-                else
-                {
-                    response.StatusCode = 404;
-                    await WriteResponse(response, new { error = "Not Found" });
-                }
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Fehler: {ex.Message}");
             }
         }
-
-        private async Task WriteResponse(HttpListenerResponse response, object body)
+        public static async Task WriteJsonAsync(HttpListenerResponse response, object data, int statusCode = 200)
         {
+            response.StatusCode = statusCode;
             response.ContentType = "application/json";
-            var json = JsonConvert.SerializeObject(body);
-            var buffer = Encoding.UTF8.GetBytes(json);
-            await response.OutputStream.WriteAsync(buffer);
-            response.Close();
+            var json = JsonConvert.SerializeObject(data);
+            var bytes = Encoding.UTF8.GetBytes(json);
+            await response.OutputStream.WriteAsync(bytes, 0, bytes.Length);
         }
+        public RequestRouter(UserController userCon, MediaController mediaCon, RatingController ratingCon)
+        {
+            _userController = userCon;
+            _mediaController = mediaCon;
+            _ratingController = ratingCon;
+        }
+
+        private UserController _userController;
+        private MediaController _mediaController;
+        private RatingController _ratingController;
     }
 }
 

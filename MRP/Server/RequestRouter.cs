@@ -18,11 +18,22 @@ namespace MRP.Server
         {
             var req = httpContext.Request;
             var res = httpContext.Response;
+
+            foreach (var route in _routes)
+            {
+                if (RouteKey.Matches(route.Key, req))
+                {
+                    await route.Value(req, res);
+                    return;
+                }
+            }
+
+            // Invalid Path
         }
 
-        public void AddRoute(string requestData, Action<string> handler)
+        public void AddRoute(RouteKey key, Func<HttpListenerRequest, HttpListenerResponse, Task> handler)
         {
-            Task task = new Task(() => handler(requestData));
+            _routes.Add(key, handler);
         }
 
         public static async Task WriteJsonAsync(HttpListenerResponse response, object data, int statusCode = 200)
@@ -41,12 +52,12 @@ namespace MRP.Server
 
         public RequestRouter()
         {
-             _routes = new Dictionary<string, Func<HttpListenerRequest, HttpListenerResponse, Task>>();
+             _routes = new Dictionary<RouteKey, Func<HttpListenerRequest, HttpListenerResponse, Task>>();
         }
 
         /****************************/
         /*          MEMBERS         */
         /****************************/
-        private Dictionary<(string, int), Func<HttpListenerRequest, HttpListenerResponse, Task>> _routes;
+        private Dictionary<RouteKey, Func<HttpListenerRequest, HttpListenerResponse, Task>> _routes;
     }
 }

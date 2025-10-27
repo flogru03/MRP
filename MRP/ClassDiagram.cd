@@ -1,34 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="MRP.Business.NoUserFoundException">
-    <Position X="0.5" Y="7.25" Width="3.25" />
+    <Position X="10.25" Y="4.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Business\Exceptions\NoUserFoundException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Business.UserAlreadyExistsException">
-    <Position X="0.5" Y="9" Width="3.5" />
+    <Position X="10.25" Y="6.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Business\Exceptions\UserAlreadyExistsException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Business.PasswordHasher">
-    <Position X="12.25" Y="9" Width="1.5" />
+    <Position X="10.25" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Business\PasswordHasher.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Business.Models.Game">
-    <Position X="11.5" Y="12.5" Width="2.5" />
+    <Position X="9.75" Y="13.75" Width="2.5" />
     <InheritanceLine Type="MRP.Business.Models.MediaEntry" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="3.5" Y="15.209" />
-        <Point X="3.5" Y="15.576" />
-        <Point X="12.625" Y="15.576" />
-        <Point X="12.625" Y="14.184" />
+        <Point X="1.75" Y="16.459" />
+        <Point X="1.75" Y="16.576" />
+        <Point X="10.875" Y="16.576" />
+        <Point X="10.875" Y="15.434" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -37,20 +37,20 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Business.Models.MediaEntry">
-    <Position X="2.25" Y="12.5" Width="2.5" />
+    <Position X="0.5" Y="13.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAgAEAAACEAAAAAAAAAAAACEAAAAAAAAAA=</HashCode>
       <FileName>Business\Models\Entries\MediaEntry.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Business.Models.Movie">
-    <Position X="8.75" Y="12.5" Width="2.5" />
+    <Position X="7" Y="13.75" Width="2.5" />
     <InheritanceLine Type="MRP.Business.Models.MediaEntry" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="3.5" Y="15.209" />
-        <Point X="3.5" Y="15.595" />
-        <Point X="10" Y="15.595" />
-        <Point X="10" Y="14.184" />
+        <Point X="1.75" Y="16.459" />
+        <Point X="1.75" Y="16.595" />
+        <Point X="8.25" Y="16.595" />
+        <Point X="8.25" Y="15.434" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -59,13 +59,13 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Business.Models.Series">
-    <Position X="6" Y="12.5" Width="2.5" />
+    <Position X="4.25" Y="13.75" Width="2.5" />
     <InheritanceLine Type="MRP.Business.Models.MediaEntry" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="3.5" Y="15.209" />
-        <Point X="3.5" Y="15.576" />
-        <Point X="7.188" Y="15.576" />
-        <Point X="7.188" Y="14.184" />
+        <Point X="1.75" Y="16.459" />
+        <Point X="1.75" Y="16.595" />
+        <Point X="5.438" Y="16.595" />
+        <Point X="5.438" Y="15.434" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -74,21 +74,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Business.Models.MediaRating">
-    <Position X="14.25" Y="12.5" Width="2.75" />
+    <Position X="12.5" Y="13.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AEASBAAEAAAAAAAAACAAAAAAACgAAAACEAAAAAAAAAA=</HashCode>
       <FileName>Business\Models\MediaRating.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Business.Models.User">
-    <Position X="17.25" Y="12.5" Width="2.5" />
+    <Position X="15.5" Y="13.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAQAAAAAAAAAAAAACBAAAAAAAAAA=</HashCode>
       <FileName>Business\Models\User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Database.MediaRepository" BaseTypeListCollapsed="true">
-    <Position X="9.5" Y="21.25" Width="2.75" />
+    <Position X="4" Y="18" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAYAACAAAAAAAACAAAAAAABAACAAAAAAAgAAAAAAAIA=</HashCode>
       <FileName>Database\MediaRepository.cs</FileName>
@@ -96,7 +96,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MRP.Database.UserRepository" BaseTypeListCollapsed="true">
-    <Position X="12.5" Y="21.25" Width="2.25" />
+    <Position X="7" Y="18" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAYAAAAAAAAAAACAAAAAAAAAACAAAAAAAgAAAAAAAIA=</HashCode>
       <FileName>Database\UserRepository.cs</FileName>
@@ -104,84 +104,84 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MRP.Server.HttpServer">
-    <Position X="11" Y="2.25" Width="2" />
+    <Position X="0.5" Y="2.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Server\HttpServer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Server.RequestRouter">
-    <Position X="11" Y="5" Width="2" />
+    <Position X="0.5" Y="5.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAQAAAAAAABAAAAgAAAACAAAAA=</HashCode>
       <FileName>Server\RequestRouter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Services.MediaEntryService">
-    <Position X="6" Y="17.75" Width="2.75" />
+    <Position X="0.5" Y="10.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
       <FileName>Services\MediaEntryService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Services.UserService">
-    <Position X="9" Y="17.75" Width="2.25" />
+    <Position X="3.5" Y="10.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAIAAAAAAAAAIAAEAE=</HashCode>
       <FileName>Services\UserService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Program">
-    <Position X="11.25" Y="0.75" Width="1.5" />
+    <Position X="0.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Controller.UserController">
-    <Position X="9.5" Y="8.5" Width="2.25" />
+    <Position X="0.5" Y="8" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAEAQAAAAAEAAAAABAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Controller\UserController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MRP.Services.AuthenticationService">
-    <Position X="13.5" Y="5" Width="2.5" />
+    <Position X="3" Y="5.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAACAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Services\AuthenticationService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="MRP.Database.IRepository&lt;TModel&gt;">
-    <Position X="6" Y="21.25" Width="2.5" />
+    <Position X="0.5" Y="18" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAYAAAAAAAAAAAAAAAAAAAAAACAAAAAAAgAAAAAAAIA=</HashCode>
       <FileName>Database\IRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="MRP.Business.Enums.GameGenre">
-    <Position X="2.25" Y="4" Width="1.5" />
+    <Position X="12" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAgAAAAQAAABAAAAIAAAAAAAAAA=</HashCode>
       <FileName>Business\Enums\GameGenre.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="MRP.Business.Enums.MovieGenre">
-    <Position X="4" Y="4" Width="1.5" />
+    <Position X="13.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAACAEAAAAAQ=</HashCode>
       <FileName>Business\Enums\MovieGenre.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="MRP.Business.Enums.SeriesGenre">
-    <Position X="5.75" Y="4" Width="1.5" />
+    <Position X="15.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAAAQAAAAAAAAAAAAAAAAAACAEAAAAAQ=</HashCode>
       <FileName>Business\Enums\SeriesGenre.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="MRP.Business.Enums.StarRating">
-    <Position X="0.5" Y="4" Width="1.5" />
+    <Position X="10.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAYAAAAAAoAAAAAAEAAAQAAAAAAEAAAAAAgAAAkAAIA=</HashCode>
       <FileName>Business\Enums\StarRating.cs</FileName>

@@ -38,7 +38,7 @@ namespace MRP.Server
         /// </summary>
         /// <param name="prefix"></param>
         /// <param name="router"></param>
-        public HttpServer(string prefix, RequestRouter router)
+        public HttpServer(string prefix, RequestRouterOld router)
         {
             _listener = new HttpListener();
             _listener.Prefixes.Add(prefix);
@@ -49,7 +49,7 @@ namespace MRP.Server
         /*          MEMBERS         */
         /****************************/
         private readonly HttpListener _listener;
-        private readonly RequestRouter _router;
+        private readonly RequestRouterOld _router;
     }
 }
 

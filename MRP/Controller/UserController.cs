@@ -53,12 +53,12 @@ namespace MRP.Controller
             catch (UserAlreadyExistsException e)
             {
                 Console.WriteLine("Error: User already exists!");
-                await RequestRouter.WriteJsonAsync(res, e.Message, (int)HttpStatusCode.Conflict);
+                await RequestRouterOld.WriteJsonAsync(res, e.Message, (int)HttpStatusCode.Conflict);
             }
             catch (ArgumentNullException e)
             {
                 Console.WriteLine("Error: Empty DTO!");
-                await RequestRouter.WriteJsonAsync(res, e.Message, (int)HttpStatusCode.Conflict);
+                await RequestRouterOld.WriteJsonAsync(res, e.Message, (int)HttpStatusCode.Conflict);
             }
         }
 
@@ -84,12 +84,12 @@ namespace MRP.Controller
 
                 // TODO: Generate Token
                 _auth.GenerateToken(dto!.Username);
-                await RequestRouter.WriteJsonAsync(res, "Login successful", (int)HttpStatusCode.OK);
+                await RequestRouterOld.WriteJsonAsync(res, "Login successful", (int)HttpStatusCode.OK);
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error: Login");
-                await RequestRouter.WriteJsonAsync(res, e.Message, (int)HttpStatusCode.Conflict);
+                await RequestRouterOld.WriteJsonAsync(res, e.Message, (int)HttpStatusCode.Conflict);
             }
         }
 

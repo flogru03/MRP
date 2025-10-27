@@ -1,7 +1,7 @@
-﻿using System.Text;
-using System.Net;
+﻿using MRP.Controller;
 using Newtonsoft.Json;
-using MRP.Controller;
+using System.Net;
+using System.Text;
 
 namespace MRP.Server
 {
@@ -14,55 +14,20 @@ namespace MRP.Server
         /*          METHODS         */
         /****************************/
 
-        /// <summary>
-        /// Aanalyses path and calls corresponding handler
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public async Task HandleRequest(HttpListenerContext context)
+        public async void HandleRequestAsync(HttpListenerContext httpContext)
         {
-            try
-            {
-                var request = context.Request;
-                var response = context.Response;
-
-                string path = request.Url!.AbsolutePath.ToLower();
-                string method = request.HttpMethod.ToUpper();
-
-                Console.WriteLine($"[{method}] {path}");
-
-                switch (path)
-                {
-                    case "/api/user":
-                        await _userController.HandleRequestAsync(request, response);
-                        break;
-                    case "/api/media":
-                        break;
-                    case "/api/ratings":
-                        break;
-                    case "/api/leaderboard":
-                        break;
-                    default:
-                        await WriteJsonAsync(response, $"Error: {path}: invalid path", 404);
-                        break;
-                }
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Fehler: {e.Message}");
-            }
+            var req = httpContext.Request;
+            var res = httpContext.Response;
         }
 
-        /// <summary>
-        /// Writes Http-response
-        /// </summary>
-        /// <param name="response"></param>
-        /// <param name="data"></param>
-        /// <param name="statusCode"></param>
-        /// <returns></returns>
+        public void AddRoute(string requestData, Action<string> handler)
+        {
+            Task task = new Task(() => handler(requestData));
+        }
+
         public static async Task WriteJsonAsync(HttpListenerResponse response, object data, int statusCode = 200)
         {
+
             response.StatusCode = statusCode;
             response.ContentType = "application/json";
             var json = JsonConvert.SerializeObject(data);
@@ -74,25 +39,14 @@ namespace MRP.Server
         /*          CONSTRUCTORS         */
         /*********************************/
 
-        /// <summary>
-        /// Initializes new Instance of the RequestRouter-class
-        /// </summary>
-        /// <param name="userCon">User Controller</param>
-        /// <param name="mediaCon">Media Controller</param>
-        /// <param name="ratingCon">Rating Controller</param>
-        public RequestRouter(UserController userCon, MediaController mediaCon, RatingController ratingCon)
+        public RequestRouter()
         {
-            _userController = userCon;
-            _mediaController = mediaCon;
-            _ratingController = ratingCon;
+             _routes = new Dictionary<string, Func<HttpListenerRequest, HttpListenerResponse, Task>>();
         }
 
         /****************************/
         /*          MEMBERS         */
         /****************************/
-        private UserController _userController;
-        private MediaController _mediaController;
-        private RatingController _ratingController;
+        private Dictionary<(string, int), Func<HttpListenerRequest, HttpListenerResponse, Task>> _routes;
     }
 }
-

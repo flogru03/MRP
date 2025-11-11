@@ -21,7 +21,7 @@ namespace MRP.Server
 
             foreach (var route in _routes)
             {
-                if (RouteKey.Matches(route.Key, req))
+                if (RouteKey.Matches(route.Key, req, out var parameters))
                 {
                     await route.Value(req, res);
                     return;

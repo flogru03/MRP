@@ -25,7 +25,7 @@ namespace MRP.Server
             while (true)
             {
                 var context = _listener.GetContext();
-                using var _ = Task.Run(() => _router.HandleRequest(context));
+                using var _ = Task.Run(() => _router.HandleRequestAsync(context));
             }
         }
 
@@ -38,7 +38,7 @@ namespace MRP.Server
         /// </summary>
         /// <param name="prefix"></param>
         /// <param name="router"></param>
-        public HttpServer(string prefix, RequestRouterOld router)
+        public HttpServer(string prefix, RequestRouter router)
         {
             _listener = new HttpListener();
             _listener.Prefixes.Add(prefix);
@@ -49,7 +49,7 @@ namespace MRP.Server
         /*          MEMBERS         */
         /****************************/
         private readonly HttpListener _listener;
-        private readonly RequestRouterOld _router;
+        private readonly RequestRouter _router;
     }
 }
 
